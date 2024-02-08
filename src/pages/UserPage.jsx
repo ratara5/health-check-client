@@ -1,23 +1,13 @@
 import React from 'react'
-import {useEffect, useState} from 'react'
-import {getUsersRequest} from '../api/users.api'
+import {useEffect} from 'react'
 import UserCard from '../components/UserCard';
+import { useUsers } from '../context/UserProvider';
 
 
 function UserPage() {
 
-    const [users, setUsers] = useState([]);
+    const {users, loadUsers} = useUsers();
 
-    const loadUsers = async () => {
-        try {
-            const response = await getUsersRequest();
-            console.log(response.data);
-            setUsers(response.data);
-        } catch (error) {
-            console.log(error)
-        }
-        
-    }
 
     useEffect(()=>{  
         loadUsers();
@@ -36,6 +26,7 @@ function UserPage() {
 
         </div>
     )
+
 }
 
 export default UserPage
