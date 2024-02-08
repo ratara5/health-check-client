@@ -47,7 +47,8 @@ export const UserContextProvider = ({children}) => {
 
     const checkHealthUser = async (userId) => {
         try {
-            const response = await healthCheckUserRequest(userId);    
+            const response = await healthCheckUserRequest(userId);   
+            alert("IMC: " + response.data.imc + "\nEDAD: " + response.data.currentAge) 
             console.log(response.data);
         } catch (error) {
             console.error(error)
