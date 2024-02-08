@@ -22,16 +22,17 @@ function UserPage() {
     useEffect(()=>{  
         loadUsers();
     },[])
+
+    function renderMain() {
+        if(users.length===0) return <h1>No hay usuarios aún</h1>
+        return users.map((user)=><UserCard user={user} key={user.userId}/>);
+    }
     
 
     return (
         <div>
             <h1>Users</h1>
-            {
-                users.map((user)=>{
-                    <UserCard user={user} key={user.userId}/>
-                })
-            }
+            { renderMain()}
 
         </div>
     )
