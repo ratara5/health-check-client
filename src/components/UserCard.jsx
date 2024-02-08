@@ -6,7 +6,7 @@ const UserCard = ({user}) => {
     const handleHealthCheck = async (userId) => {
         try {
             const response = await healthCheckUserRequest(userId);    
-            console.log(response);
+            console.log(response.data);
         } catch (error) {
             console.error(error)
         }      
