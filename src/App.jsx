@@ -9,14 +9,18 @@ import Navbar from './components/Navbar'
 
 function App() {
   return (
-    <UserContextProvider>
+    <div className='bg-zinc-900 h-screen'>
       <Navbar/>
-      <Routes>
-        <Route path="/" element={<UserPage/>}/>
-        <Route path="/new" element={<UserForm/>}/>
-        <Route path="*" element={<NotFound/>}/>
-      </Routes>
-    </UserContextProvider>
+      <div className='container mx-auto px-4 py-4'>
+        <UserContextProvider>
+          <Routes>
+            <Route path="/" element={<UserPage/>}/>
+            <Route path="/new" element={<UserForm/>}/>
+            <Route path="*" element={<NotFound/>}/>
+          </Routes>
+        </UserContextProvider>
+      </div>
+    </div>
   )
 }
 

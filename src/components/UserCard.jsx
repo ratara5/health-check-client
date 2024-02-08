@@ -6,15 +6,30 @@ const UserCard = ({user}) => {
     const {deleteUser, checkHealthUser} = useUsers();
 
     return (
-        <div>
-            <button onClick={()=>checkHealthUser(user.userId)}>IMC & Edad</button>
-            <h2>{user.name}</h2>
-            <h3>{user.birthDate}</h3>
-            <h3>{user.weight}</h3>
-            <h3>{user.height}</h3>
-            <p>{user.typeId}</p>
-            <button onClick={()=>deleteUser(user.userId)}>Borrar</button>
-            <button>Editar</button>
+        <div className='bg-zinc-700 text-white rounded-md p-4'>
+            <header className='flex justify-between'>
+                <h1 className='text-m font-bold'>{user.name}</h1>
+                <p className='text-xs'>{user.typeId}</p>
+            </header>
+            <button 
+            className='bg-blue-500 px-2 py-1 text-black' 
+            onClick={()=>checkHealthUser(user.userId)}>
+                IMC & Edad
+            </button>
+            <h3>Fecha de nacimiento: {user.birthDate}</h3>
+            <h3>Peso: {user.weight}kg</h3>
+            <h3>Talla: {user.height}cm</h3>
+            <div className='flex gap-x-2'>
+                <button 
+                className='bg-red-400 px-2 py-1 text-white' 
+                onClick={()=>deleteUser(user.userId)}>
+                    Borrar
+                </button>
+                <button 
+                className='bg-slate-700 px-2 py-1 text-white'>
+                    Editar
+                </button>
+            </div>
         </div>
     )
 }

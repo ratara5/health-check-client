@@ -29,26 +29,28 @@ const UserForm = () => {
                 
             }}>
                 {({handleChange, handleSubmit, values, isSubmitting})=> (
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit} className='bg-slate-300 max-w-sm rounded-md p-4 mx-auto'>
                         {/*<label>userId</label>
                         <input type="number" 
                         name="userId" 
                         placeholder="Escriba Id"
                         onChange={handleChange}/>*/}
 
-                        <label>Tipo de id</label>
+                        <label className='block'>Tipo de id</label>
                         <input type="text" 
                         name="typeId" 
                         placeholder="Escriba tipo de Id"
                         onChange={handleChange}
-                        value={values.typeId}/>
+                        value={values.typeId}
+                        className='px-2  py-1 rounded-sm w-full'/>
 
-                        <label>Nombre</label>
+                        <label className='block'>Nombre</label>
                         <input type="text" 
                         name="name" 
                         placeholder="Escriba nombre"
                         onChange={handleChange}
-                        value={values.name}/>
+                        value={values.name}
+                        className='px-2  py-1 rounded-sm w-full'/>
 
                         {/*<label>Fecha de Nacimiento</label>
                         <input type="text" 
@@ -57,8 +59,8 @@ const UserForm = () => {
                         onChange={handleChange}/>*/}
 
                         <div>
-                            <label htmlFor="birthDate">Fecha de nacimiento:</label>
-                            <Field name="birthDate">
+                            <label htmlFor="birthDate" className='block'>Fecha de nacimiento:</label>
+                            <Field name="birthDate" >
                                 {({ field, form }) => (
                                 <DatePicker
                                     id="birthDate"
@@ -72,21 +74,25 @@ const UserForm = () => {
                             <ErrorMessage name="birthDate" component="div" />
                         </div>
 
-                        <label>Peso(kg)</label>
+                        <label className='block'>Peso(kg)</label>
                         <input type="number" 
                         name="weight" 
                         placeholder="Escriba peso(kg)"
                         onChange={handleChange}
-                        value={values.weight}/>
+                        value={values.weight}
+                        className='px-2  py-1 rounded-sm w-full'/>
 
-                        <label>Talla(cm)</label>
+                        <label className='block'>Talla(cm)</label>
                         <input type="number" 
                         name="height" 
                         placeholder="Escriba talla(cm)"
                         onChange={handleChange}
-                        value={values.height}/>
+                        value={values.height}
+                        className='px-2  py-1 rounded-sm w-full'/>
 
-                        <button type="submit" disabled={isSubmitting}>
+                        <button 
+                        type="submit" disabled={isSubmitting} 
+                        className='block bg-green-500 px-2 py-1 text-white w-full rounded-md my-2'>
                             {isSubmitting ? "Saving..." : "Save"}
                         </button>
                     </Form>
