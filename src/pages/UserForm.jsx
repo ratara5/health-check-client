@@ -10,7 +10,7 @@ const UserForm = () => {
     <div>
         <Formik
         initialValues={{
-            /*id:"",*/
+            /*userId:"",*/
             typeId:"",
             name:"",
             birthDate:"",
@@ -31,9 +31,9 @@ const UserForm = () => {
         }}>
             {({handleChange, handleSubmit, values, isSubmitting})=> (
                 <Form onSubmit={handleSubmit}>
-                    {/*<label>Id</label>
+                    {/*<label>userId</label>
                     <input type="number" 
-                    name="id" 
+                    name="userId" 
                     placeholder="Escriba Id"
                     onChange={handleChange}/>*/}
 
