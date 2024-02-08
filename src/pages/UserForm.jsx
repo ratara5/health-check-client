@@ -18,11 +18,18 @@ const UserForm = () => {
             height:""
 
         }}
-        onSubmit={async (values)=>{
+        onSubmit={async (values, actions)=>{
             console.log(values)
-            await createUserRequest(values)
+            try {
+                const response = await createUserRequest(values)
+                console.log(response)
+                actions.resetForm();
+            } catch (error) {
+                console.log(error)
+            }
+            
         }}>
-            {({handleChange, handleSubmit})=> (
+            {({handleChange, handleSubmit, values, isSubmitting})=> (
                 <Form onSubmit={handleSubmit}>
                     {/*<label>Id</label>
                     <input type="number" 
@@ -34,13 +41,15 @@ const UserForm = () => {
                     <input type="text" 
                     name="typeId" 
                     placeholder="Escriba tipo de Id"
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    value={values.typeId}/>
 
                     <label>Nombre</label>
                     <input type="text" 
                     name="name" 
                     placeholder="Escriba nombre"
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    value={values.name}/>
 
                     {/*<label>Fecha de Nacimiento</label>
                     <input type="text" 
@@ -57,6 +66,7 @@ const UserForm = () => {
                                 {...field}
                                 selected={field.value}
                                 onChange={(date) => form.setFieldValue(field.name, date)}
+                                value={values.birthDate}
                             />
                             )}
                         </Field>
@@ -67,16 +77,18 @@ const UserForm = () => {
                     <input type="number" 
                     name="weight" 
                     placeholder="Escriba peso(kg)"
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    value={values.weight}/>
 
                     <label>Talla(cm)</label>
                     <input type="number" 
                     name="height" 
                     placeholder="Escriba talla(cm)"
-                    onChange={handleChange}/>
+                    onChange={handleChange}
+                    value={values.height}/>
 
-                    <button type="submit">
-                        Save
+                    <button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? "Saving..." : "Save"}
                     </button>
                 </Form>
             )}
