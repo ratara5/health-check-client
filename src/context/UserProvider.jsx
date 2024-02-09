@@ -1,6 +1,11 @@
 import {useContext, useState} from 'react'
 import {UserContext} from './UserContext'
-import {getUsersRequest, createUserRequest, deleteUserRequest, healthCheckUserRequest} from '../api/users.api'
+import {getUsersRequest, 
+    createUserRequest, 
+    deleteUserRequest, 
+    healthCheckUserRequest,
+    getUserRequest,
+    updateUserRequest} from '../api/users.api'
 
 
 
@@ -55,8 +60,27 @@ export const UserContextProvider = ({children}) => {
         }      
     }
 
+    const loadUser = async (userId) => {
+        try {
+            const response = await getUserRequest(userId);
+            return response.data
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const updateUser = async (userId, newFields) => {
+        try {
+            const response = await updateUserRequest(userId, newFields);
+            console.log(response)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
-        <UserContext.Provider value={{users, loadUsers, createUser, deleteUser, checkHealthUser}}>
+        <UserContext.Provider 
+        value={{users, loadUsers, createUser, deleteUser, checkHealthUser, loadUser, updateUser}}>
             {children}
         </UserContext.Provider>
     );
