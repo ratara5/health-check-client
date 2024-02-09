@@ -52,21 +52,18 @@ const UserForm = () => {
                 weight:"",
                 height:""
             } }
-            enableReinitialize={true}
-            onSubmit={async (values, actions)=>{
-                
 
+            enableReinitialize={true}
+            
+            onSubmit={async (values, actions)=>{
                 if(params.id){
                     await updateUser(params.id, values)
                     navigate("/")
                 } else {
                     createUser(values);
-                    console.log("create user values");
                     console.log(values);
                 }
-
-                
-                
+                actions.resetForm(); 
             }}
             >
                 {({handleChange, handleSubmit, values, isSubmitting})=> (
