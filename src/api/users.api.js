@@ -11,4 +11,10 @@ export const deleteUserRequest = async (userId) =>
     await axios.delete(`http://localhost:8091/health-check/api/users/delete/${userId}`);
 
 export const healthCheckUserRequest = async (userId) => 
-await axios.get(`http://localhost:8091/health-check/api/users/${userId}`);
+    await axios.get(`http://localhost:8091/health-check/api/users/${userId}`);
+
+export const getUserRequest = async (userId) => 
+    await axios.get(`http://localhost:8091/health-check/api/users/${userId}`);    
+
+export const updateUserRequest = async (userId, newFields) => 
+    await axios.put(`http://localhost:8091/health-check/api/users/update/${userId}`, newFields);

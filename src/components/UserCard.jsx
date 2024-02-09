@@ -1,9 +1,11 @@
 import React from 'react'
 import {useUsers} from '../context/UserProvider'
+import {useNavigate} from 'react-router-dom'
 
 const UserCard = ({user}) => {
 
     const {deleteUser, checkHealthUser} = useUsers();
+    const navigate = useNavigate();
 
     return (
         <div className='bg-zinc-700 text-white rounded-md p-4'>
@@ -26,7 +28,8 @@ const UserCard = ({user}) => {
                     Borrar
                 </button>
                 <button 
-                className='bg-slate-700 px-2 py-1 text-white'>
+                className='bg-slate-700 px-2 py-1 text-white'
+                onClick={()=>navigate(`/edit/${user.userId}`)}>
                     Editar
                 </button>
             </div>

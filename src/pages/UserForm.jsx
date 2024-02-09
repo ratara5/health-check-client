@@ -1,33 +1,74 @@
-import React from 'react'
+import React from 'react';
+import { useEffect, useState } from 'react';
 import {Form, Field, Formik, ErrorMessage} from 'formik'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {useUsers} from '../context/UserProvider'
+import {useParams, useNavigate} from 'react-router-dom'
 
-import {createUserRequest} from '../api/users.api'
 
 const UserForm = () => {
 
-    const {createUser} = useUsers()
+    const {createUser, loadUser, updateUser} = useUsers()
+    const [user, setUser] = useState([
+        {
+            typeId: "",
+            name: "",
+            birthDate: "",
+            weight: "",
+            height: ""
+        }
+    ])
+    const params = useParams()
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        const loadUserUseEffect = async () => {
+            if(params.id){
+                const user = await loadUser(params.id)
+                setUser({
+                    typeId: user.typeId,
+                    name: user.name,
+                    birthDate: user.birthDate,
+                    weight: user.weight,
+                    height: user.height
+                });
+                console.log(user);
+            }
+        }
+        loadUserUseEffect()        
+    },[])
+
+
     
     return (
         <div>
+            <h1 className='text-4xl text-white font-bold text-center'>{params.id ? "Editar Usuario" : "Crear Usuario"}</h1>
             <Formik
-            initialValues={{
-                /*userId:"",*/
+            initialValues={params.id ? user : {
                 typeId:"",
                 name:"",
                 birthDate:"",
                 weight:"",
                 height:""
-
-            }}
+            } }
+            enableReinitialize={true}
             onSubmit={async (values, actions)=>{
-                console.log(values);
-                createUser(values);
-                actions.resetForm();
                 
-            }}>
+
+                if(params.id){
+                    await updateUser(params.id, values)
+                    navigate("/")
+                } else {
+                    createUser(values);
+                    console.log("create user values");
+                    console.log(values);
+                }
+
+                
+                
+            }}
+            >
                 {({handleChange, handleSubmit, values, isSubmitting})=> (
                     <Form onSubmit={handleSubmit} className='bg-slate-300 max-w-sm rounded-md p-4 mx-auto'>
                         {/*<label>userId</label>
