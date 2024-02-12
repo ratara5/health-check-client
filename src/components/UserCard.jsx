@@ -11,7 +11,7 @@ const UserCard = ({user}) => {
         <div className='bg-zinc-700 text-white rounded-md p-4'>
             <header className='flex justify-between'>
                 <h1 className='text-m font-bold'>{user.name}</h1>
-                <p className='text-xs'>{user.typeId}</p>
+                <p className='text-xs'>{user.typeId}-{user.userId}</p>
             </header>
             <button 
             className='bg-blue-500 px-2 py-1 text-black' 
