@@ -41,10 +41,10 @@ export const UserContextProvider = ({children}) => {
         }
     }
 
-    const deleteUser = async (userId) => {
+    const deleteUser = async (typeId, userId) => {
         try {
-            const response = await deleteUserRequest(userId);    
-            setUsers(users.filter(user => user.userId !== userId))
+            const response = await deleteUserRequest(typeId, userId);    
+            setUsers(users.filter(user => user.userId !== userId && user.typeId !== typeId))
         } catch (error) {
             console.error(error)
         }      
@@ -60,18 +60,18 @@ export const UserContextProvider = ({children}) => {
         }      
     }
 
-    const loadUser = async (userId) => {
+    const loadUser = async (typeId, userId) => {
         try {
-            const response = await getUserRequest(userId);
+            const response = await getUserRequest(typeId, userId);
             return response.data
         } catch (error) {
             console.error(error);
         }
     }
 
-    const updateUser = async (userId, newFields) => {
+    const updateUser = async (typeId, userId, newFields) => {
         try {
-            const response = await updateUserRequest(userId, newFields);
+            const response = await updateUserRequest(typeId, userId, newFields);
             console.log(response)
         } catch (error) {
             console.error(error);

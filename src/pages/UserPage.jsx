@@ -1,24 +1,18 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
-import UserCard from '../components/UserCard';
-import { useUsers } from '../context/UserProvider';
+import UserCard from '../components/UserCard'
 
 
-function UserPage() {
-
-    const {users, loadUsers} = useUsers();
-
+function UserPage({users}) {
 
     const [q, setQ] = useState("");
     const [searchParam] = useState(["typeId", "name", "weight", "height"]); // keys for search in
 
-    useEffect(()=>{  
-        loadUsers();
-    },[])
-
     function renderMain() {
         if(users.length===0) return <h1>No hay usuarios aún</h1>
-        return search(users).map((user)=><UserCard user={user} key={user.userId}/>); //users as arg in search function
+        return search(users).map((user)=>
+        <UserCard user={user} 
+        key={user.userId}/>); //users as arg in search function
     }
     
     function search(items) {
@@ -47,8 +41,7 @@ function UserPage() {
                         placeholder="Buscar por..."
                         value={q}
                         //set our param useState each time user write in input
-                        onChange={(e) => setQ(e.target.value)}
-                        
+                        onChange={(e) => setQ(e.target.value)} 
                     />
                    
                 </label>

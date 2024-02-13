@@ -13,25 +13,24 @@ const UserForm = () => {
     const [user, setUser] = useState([
         {
             typeId: "",
+            userId: "",
             name: "",
             birthDate: "",
-            weight: "",
-            height: ""
         }
     ])
     const params = useParams()
     const navigate = useNavigate()
 
     useEffect(()=>{
+        
         const loadUserUseEffect = async () => {
             if(params.id){
-                const user = await loadUser(params.id)
+                const user = await loadUser(params.id.split("-")[0], params.id.split("-")[1])
                 setUser({
                     typeId: user.typeId,
+                    userId: user.userId,
                     name: user.name,
                     birthDate: user.birthDate,
-                    weight: user.weight,
-                    height: user.height
                 });
                 console.log(user);
             }
@@ -46,18 +45,17 @@ const UserForm = () => {
             <h1 className='text-4xl text-white font-bold text-center'>{params.id ? "Editar Usuario" : "Crear Usuario"}</h1>
             <Formik
             initialValues={params.id ? user : {
-                typeId:"",
+                typeId: "",
+                userId: "",
                 name:"",
-                birthDate:"",
-                weight:"",
-                height:""
+                birthDate:""
             } }
 
             enableReinitialize={true}
             
             onSubmit={async (values, actions)=>{
                 if(params.id){
-                    await updateUser(params.id, values)
+                    await updateUser(params.id.split("-")[0], params.id.split("-")[1], values)
                     navigate("/")
                 } else {
                     createUser(values);
@@ -74,13 +72,26 @@ const UserForm = () => {
                         placeholder="Escriba Id"
                         onChange={handleChange}/>*/}
 
-                        <label className='block'>Tipo de id</label>
-                        <input type="text" 
-                        name="typeId" 
-                        placeholder="Escriba tipo de Id"
-                        onChange={handleChange}
-                        value={values.typeId}
-                        className='px-2  py-1 rounded-sm w-full'/>
+                        {/*{if(param.id){*/}
+                            <>
+                                <label className='block'>Tipo de id</label>
+                                <input type="text" 
+                                name="typeId" 
+                                placeholder="Escriba tipo de Id"
+                                onChange={handleChange}
+                                value={values.typeId}
+                                className='px-2  py-1 rounded-sm w-full'/>
+
+                                <label className='block'>Número de id</label>
+                                <input type="text" 
+                                name="userId" 
+                                placeholder="Escriba número de Id"
+                                onChange={handleChange}
+                                value={values.userId}
+                                className='px-2  py-1 rounded-sm w-full'/>
+                            </>
+                        {/*}
+                        }*/}
 
                         <label className='block'>Nombre</label>
                         <input type="text" 
@@ -112,21 +123,21 @@ const UserForm = () => {
                             <ErrorMessage name="birthDate" component="div" />
                         </div>
 
-                        <label className='block'>Peso(kg)</label>
+                        {/*<label className='block'>Peso(kg)</label>
                         <input type="number" 
                         name="weight" 
                         placeholder="Escriba peso(kg)"
                         onChange={handleChange}
                         value={values.weight}
-                        className='px-2  py-1 rounded-sm w-full'/>
+                                className='px-2  py-1 rounded-sm w-full'/>*/}
 
-                        <label className='block'>Talla(cm)</label>
+                        {/*<label className='block'>Talla(cm)</label>
                         <input type="number" 
                         name="height" 
                         placeholder="Escriba talla(cm)"
                         onChange={handleChange}
                         value={values.height}
-                        className='px-2  py-1 rounded-sm w-full'/>
+                            className='px-2  py-1 rounded-sm w-full'/>*/}
 
                         <button 
                         type="submit" disabled={isSubmitting} 
